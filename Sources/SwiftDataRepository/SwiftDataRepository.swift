@@ -1,22 +1,23 @@
 import Foundation
 import SwiftData
 
-protocol SwiftDataServiceProtocol<T> {
+protocol SwiftDataRepositoryProtocol<T> {
     associatedtype T: PersistentModel
     func fetchData(predicate: Predicate<T>?, sortBy: [SortDescriptor<T>]) -> [T]
     func addData(_ notepad: T)
     func removeData(_ notepad: T)
 }
 
-// Default Arguements for Protocol
-extension SwiftDataServiceProtocol {
+// Default Arguments for Protocol
+extension SwiftDataRepositoryProtocol {
     func fetchData(predicate: Predicate<T>? = nil,
                        sortBy: [SortDescriptor<T>] = .init()) -> [T] {
         self.fetchData(predicate: predicate, sortBy: sortBy)
     }
 }
 
-open class SwiftDataService<T: PersistentModel>: SwiftDataServiceProtocol {
+
+open class SwiftDataRepository<T: PersistentModel>: SwiftDataRepositoryProtocol {
     
     private let modelContainer: ModelContainer
     private let modelContext: ModelContext

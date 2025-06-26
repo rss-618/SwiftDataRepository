@@ -4,17 +4,17 @@
 import PackageDescription
 
 let package = Package(
-    name: "SwiftDataService",
+    name: "SwiftDataRepository",
     platforms: [
         .iOS(.v17), .macOS(.v14), .watchOS(.v10)
     ],
     products: [
         .library(
-            name: "SwiftDataService",
-            targets: ["SwiftDataService"]),
+            name: "SwiftDataRepository",
+            targets: ["SwiftDataRepository"]),
     ],
     targets: [
         .target(
-            name: "SwiftDataService"),
+            name: "SwiftDataRepository"),
     ]
 )
