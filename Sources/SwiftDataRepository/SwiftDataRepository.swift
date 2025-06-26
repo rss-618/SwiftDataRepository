@@ -1,7 +1,7 @@
 import Foundation
 import SwiftData
 
-protocol SwiftDataRepositoryProtocol<T> {
+public protocol SwiftDataRepository<T> {
     associatedtype T: PersistentModel
     func fetchData(predicate: Predicate<T>?, sortBy: [SortDescriptor<T>]) -> [T]
     func addData(_ notepad: T)
@@ -9,15 +9,15 @@ protocol SwiftDataRepositoryProtocol<T> {
 }
 
 // Default Arguments for Protocol
-extension SwiftDataRepositoryProtocol {
-    func fetchData(predicate: Predicate<T>? = nil,
-                       sortBy: [SortDescriptor<T>] = .init()) -> [T] {
+extension SwiftDataRepository {
+    public func fetchData(predicate: Predicate<T>? = nil,
+                          sortBy: [SortDescriptor<T>] = .init()) -> [T] {
         self.fetchData(predicate: predicate, sortBy: sortBy)
     }
 }
 
 
-open class SwiftDataRepository<T: PersistentModel>: SwiftDataRepositoryProtocol {
+public final class SwiftDataRepositoryImpl<T: PersistentModel>: SwiftDataRepository {
     
     private let modelContainer: ModelContainer
     private let modelContext: ModelContext
@@ -37,7 +37,7 @@ open class SwiftDataRepository<T: PersistentModel>: SwiftDataRepositoryProtocol 
         self.modelContext = modelContainer.mainContext
     }
     
-    func fetchData(predicate: Predicate<T>? = nil,
+    public func fetchData(predicate: Predicate<T>? = nil,
                    sortBy: [SortDescriptor<T>] = .init()) -> [T] {
         do {
             return try modelContext.fetch(FetchDescriptor<T>(predicate: predicate,
@@ -47,17 +47,17 @@ open class SwiftDataRepository<T: PersistentModel>: SwiftDataRepositoryProtocol 
         }
     }
     
-    func addData(_ item: T) {
+    public func addData(_ item: T) {
         modelContext.insert(item)
         saveContext()
     }
     
-    func removeData(_ item: T) {
+    public func removeData(_ item: T) {
         modelContext.delete(item)
         saveContext()
     }
     
-    private func saveContext() {
+    public func saveContext() {
         do {
             try modelContext.save()
         } catch {
