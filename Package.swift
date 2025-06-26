@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "SwiftDataService",
+    platforms: [
+        .iOS(.v17), .macOS(.v14), .watchOS(.v10)
+    ],
     products: [
         .library(
             name: "SwiftDataService",

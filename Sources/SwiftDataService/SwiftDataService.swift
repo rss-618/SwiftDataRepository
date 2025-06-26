@@ -1,7 +1,6 @@
 import Foundation
 import SwiftData
 
-@available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 protocol SwiftDataServiceProtocol<T> {
     associatedtype T: PersistentModel
     func fetchData(predicate: Predicate<T>?, sortBy: [SortDescriptor<T>]) -> [T]
@@ -10,7 +9,6 @@ protocol SwiftDataServiceProtocol<T> {
 }
 
 // Default Arguements for Protocol
-@available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 extension SwiftDataServiceProtocol {
     func fetchData(predicate: Predicate<T>? = nil,
                        sortBy: [SortDescriptor<T>] = .init()) -> [T] {
@@ -18,7 +16,6 @@ extension SwiftDataServiceProtocol {
     }
 }
 
-@available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
 open class SwiftDataService<T: PersistentModel>: SwiftDataServiceProtocol {
     
     private let modelContainer: ModelContainer
