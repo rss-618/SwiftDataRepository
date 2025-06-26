@@ -13,7 +13,7 @@ final class Notepad {
 }
 ```
 
-Ext_SwiftDataRepository
+Ext_SwiftDataRepository.swift
 ```swift
 import SwiftDataRepository
 
